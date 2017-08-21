@@ -182,8 +182,8 @@ defmodule JUnitFormatter do
   end
 
   defp generate_testcases(test) do
-    {:testcase, [classname: Atom.to_char_list(test.case),
-                 name: Atom.to_char_list(test.name),
+    {:testcase, [classname: Atom.to_charlist(test.case),
+                 name: Atom.to_charlist(test.name),
                  time: test.time |> us_to_ms |> format_ms],
      generate_test_body(test)
     }
@@ -204,7 +204,7 @@ defmodule JUnitFormatter do
         %{message: message} -> message
         other -> inspect(other)
       end
-    [{:failure, [message: Atom.to_string(kind) <> ": " <> message], [String.to_char_list(formatted_stack)]}]
+    [{:failure, [message: Atom.to_string(kind) <> ": " <> message], [String.to_charlist(formatted_stack)]}]
   end
   defp generate_test_body(%ExUnit.Test{state: {:invalid, module}}) do
     [{:error, [message: "Invalid module #{inspect module}"], []}]
